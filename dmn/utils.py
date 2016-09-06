@@ -27,6 +27,10 @@ def init_babi(fname):
 
 def get_babi_raw(id, test_id):
     babi_map = {
+	"sq1" : "dev-v1.1.json.babi"
+ 	"sq2" : "dev-v1.1.json_long.babi"
+	"sq3" : "train-v1.1.json.babi"
+	"sq4" : "train-v1.1.json_long.babi"
 	"0": "all_shuffled",   
 	"1": "qa1_single-supporting-fact",
         "2": "qa2_two-supporting-facts",
@@ -35,6 +39,7 @@ def get_babi_raw(id, test_id):
         "5": "qa5_three-arg-relations",
         "6": "qa6_yes-no-questions",
         "7": "qa7_counting",
+        "8": "qa8_lists-sets",
         "8": "qa8_lists-sets",
         "9": "qa9_simple-negation",
         "10": "qa10_indefinite-knowledge",

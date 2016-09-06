@@ -111,8 +111,8 @@ if __name__=="__main__":
 	babify(dataset)
 	mode = sys.argv[2]
 	if mode=='-g':
-		printdataset_firsttext(dataset,open(dataset_name+'_long.babi','w'),mode)
+		printdataset_firsttext(dataset,open(dataset_name+'_long.babi.txt','w'),mode)
 	else:
-		printdataset(dataset,open(dataset_name+'.babi','w'),mode)
+		printdataset(dataset,open(dataset_name+'.babi.txt','w'),mode)
 
 
