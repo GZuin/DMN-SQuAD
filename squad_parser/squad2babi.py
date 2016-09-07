@@ -114,9 +114,10 @@ if __name__=="__main__":
 	dataset = json.load(open(dataset_name))['data']
 	babify(dataset)
 	mode = sys.argv[2]
+	traintest = sys.argv[3]
 	if mode=='-g':
-		printdataset_firsttext(dataset,open(dataset_name+'_long.babi.txt','w'),mode)
+		printdataset_firsttext(dataset,open(dataset_name+'_'+traintest+'.txt','w'),mode)
 	else:
-		printdataset(dataset,open(dataset_name+'.babi.txt','w'),mode)
+		printdataset(dataset,open(dataset_name+'_'+traintest+'.txt','w'),mode)
 
 
