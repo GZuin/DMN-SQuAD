@@ -10,7 +10,10 @@ def babify(dataset):
 		subject=dataset[sub]
 		for p in range(0,len(subject['paragraphs'])):
 			paragraph = subject['paragraphs'][p]
-			paragraph['context']=paragraph['context'].replace('\\n','')
+			
+			while paragraph['context'].find('\n')!=-1:
+				paragraph['context']=paragraph['context'].replace('\n','')
+			
 			sentences = nltk.sent_tokenize(paragraph['context'])
 			#print l
 			#vet = nltk.sent_tokenize(l)
@@ -18,9 +21,9 @@ def babify(dataset):
 
 
 			for q in range(0,len(paragraph['qas'])):
-				paragraph['qas'][q]['question']=paragraph['qas'][q]['question'].replace('\\n','')
+				paragraph['qas'][q]['question']=paragraph['qas'][q]['question'].replace('\n','')
 				for i in range(0,len(paragraph['qas'][q]['answers'])):
-					paragraph['qas'][q]['answers'][i]['text']=paragraph['qas'][q]['answers'][i]['text'].replace('\\n','')
+					paragraph['qas'][q]['answers'][i]['text']=paragraph['qas'][q]['answers'][i]['text'].replace('\n','')
 					qstart = paragraph['qas'][q]['answers'][i]['answer_start']
 					basecounter=0
 					for s in range(0,len(sentences)):
