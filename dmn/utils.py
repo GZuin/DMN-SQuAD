@@ -13,8 +13,10 @@ def init_babi(fname):
         if id == 1:
             task = {"C": "", "Q": "", "A": ""} 
         line = line.strip()
-        line = line.replace('.', ' . ')
-        line = line[line.find(' ')+1:]
+        #line = line.replace('.', ' . ')
+       	line = "".join([c if c.isalnum() else ' '+c+' ' for c in line])
+	
+	line = line[line.find(' ')+1:]
         
         if line.find("? \t") == -1:
             task["C"] += line
@@ -22,7 +24,10 @@ def init_babi(fname):
             idx = line.find('?')
             tmp = line[idx+1:].split('\t')
             task["Q"] = line[:idx]
-            task["A"] = tmp[1].strip()
+#            print line[:idx]
+	    task["A"] = tmp[1].strip()
+#            print tmp[1].strip()
+#    	     raw_input("Press Enter to continue...")
             tasks.append(task.copy())
 
     return tasks
