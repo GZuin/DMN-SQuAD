@@ -15,14 +15,14 @@ def babify(dataset):
 			#print l
 			#vet = nltk.sent_tokenize(l)
 			for si in range(0,len(sentences)):
-				sentences[si].replace('\n','') #remove odd '\n' from middle of text that are know to cause bugs
+				sentences[si].replace('\\n','') #remove odd '\n' from middle of text that are know to cause bugs
 			paragraph['context']=sentences
 
 
 			for q in range(0,len(paragraph['qas'])):
-				paragraph['qas'][q]['question'].replace('\n','')
+				paragraph['qas'][q]['question'].replace('\\n','')
 				for i in range(0,len(paragraph['qas'][q]['answers'])):
-					paragraph['qas'][q]['answers'][i]['text'].replace('\n','')
+					paragraph['qas'][q]['answers'][i]['text'].replace('\\n','')
 					qstart = paragraph['qas'][q]['answers'][i]['answer_start']
 					basecounter=0
 					for s in range(0,len(sentences)):
