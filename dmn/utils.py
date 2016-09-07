@@ -5,15 +5,18 @@ def init_babi(fname):
     print "==> Loading test from %s" % fname
     tasks = []
     task = None
+    lc=0
     for i, line in enumerate(open(fname)):
-        id = int(line[0:line.find(' ')])
+        lc+=1
+        #print lc
+	id = int(line[0:line.find(' ')])
         if id == 1:
             task = {"C": "", "Q": "", "A": ""} 
-            
         line = line.strip()
         line = line.replace('.', ' . ')
         line = line[line.find(' ')+1:]
-        if line.find('?') == -1:
+        
+        if line.find("? \t") == -1:
             task["C"] += line
         else:
             idx = line.find('?')
@@ -27,10 +30,11 @@ def init_babi(fname):
 
 def get_babi_raw(id, test_id):
     babi_map = {
-	"sq1" : "dev-v1.1.json.babi"
- 	"sq2" : "dev-v1.1.json_long.babi"
-	"sq3" : "train-v1.1.json.babi"
-	"sq4" : "train-v1.1.json_long.babi"
+	"sq1" : "devset",
+ 	"sq2" : "squad2babi_devset",
+	"sq3" : "train-v1.1.json.babi",
+	"sq4" : "train-v1.1.json_long.babi",
+	"toy" : "toysetsquad",
 	"0": "all_shuffled",   
 	"1": "qa1_single-supporting-fact",
         "2": "qa2_two-supporting-facts",
