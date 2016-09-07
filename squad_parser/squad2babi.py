@@ -10,12 +10,10 @@ def babify(dataset):
 		subject=dataset[sub]
 		for p in range(0,len(subject['paragraphs'])):
 			paragraph = subject['paragraphs'][p]
-
+			paragraph['context'].replace('\\n','')
 			sentences = nltk.sent_tokenize(paragraph['context'])
 			#print l
 			#vet = nltk.sent_tokenize(l)
-			for si in range(0,len(sentences)):
-				sentences[si].replace('\\n','') #remove odd '\n' from middle of text that are know to cause bugs
 			paragraph['context']=sentences
 
 
