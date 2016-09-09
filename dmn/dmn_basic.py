@@ -326,7 +326,12 @@ class DMN_basic:
     
     def shuffle_train_set(self):
         print "==> Shuffling the train set"
-        combined = zip(self.train_input, self.train_q, self.train_answer, self.train_input_mask)
+       	#print self.train_input
+	#print self.train_q
+	#print self.train_answer
+	#print self.train_input_mask
+
+	combined = zip(self.train_input, self.train_q, self.train_answer, self.train_input_mask)
         random.shuffle(combined)
         self.train_input, self.train_q, self.train_answer, self.train_input_mask = zip(*combined)
         
