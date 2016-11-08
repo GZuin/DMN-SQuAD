@@ -10,7 +10,10 @@ def babify(dataset):
 		subject=dataset[sub]
 		for p in range(0,len(subject['paragraphs'])):
 			paragraph = subject['paragraphs'][p]
-
+			
+			while paragraph['context'].find('\n')!=-1:
+				paragraph['context']=paragraph['context'].replace('\n','')
+			
 			sentences = nltk.sent_tokenize(paragraph['context'])
 			#print l
 			#vet = nltk.sent_tokenize(l)
@@ -18,7 +21,9 @@ def babify(dataset):
 
 
 			for q in range(0,len(paragraph['qas'])):
+				paragraph['qas'][q]['question']=paragraph['qas'][q]['question'].replace('\n','')
 				for i in range(0,len(paragraph['qas'][q]['answers'])):
+					paragraph['qas'][q]['answers'][i]['text']=paragraph['qas'][q]['answers'][i]['text'].replace('\n','')
 					qstart = paragraph['qas'][q]['answers'][i]['answer_start']
 					basecounter=0
 					for s in range(0,len(sentences)):
@@ -110,9 +115,10 @@ if __name__=="__main__":
 	dataset = json.load(open(dataset_name))['data']
 	babify(dataset)
 	mode = sys.argv[2]
+	traintest = sys.argv[3]
 	if mode=='-g':
-		printdataset_firsttext(dataset,open(dataset_name+'_long.babi','w'),mode)
+		printdataset_firsttext(dataset,open(dataset_name+'_'+traintest+'.txt','w'),mode)
 	else:
-		printdataset(dataset,open(dataset_name+'.babi','w'),mode)
+		printdataset(dataset,open(dataset_name+'_'+traintest+'.txt','w'),mode)
 
 

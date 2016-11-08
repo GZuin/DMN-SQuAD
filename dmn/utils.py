@@ -5,28 +5,45 @@ def init_babi(fname):
     print "==> Loading test from %s" % fname
     tasks = []
     task = None
+    qc=0
+    lc=0
     for i, line in enumerate(open(fname)):
-        id = int(line[0:line.find(' ')])
+        #lc+=1
+        #print lc
+	id = int(line[0:line.find(' ')])
         if id == 1:
             task = {"C": "", "Q": "", "A": ""} 
-            
         line = line.strip()
-        line = line.replace('.', ' . ')
-        line = line[line.find(' ')+1:]
-        if line.find('?') == -1:
-            task["C"] += line
+        #line = line.replace('.', ' . ')
+       	#print line
+	line = "".join([c if c.isalnum() or c.isspace() else ' '+c+' ' for c in line])
+	#print line
+	#input("wait for key")
+	line = line[line.find(' ')+1:]
+        
+        if line.find("?  \t") == -1:
+            lc+=1
+	    task["C"] += line
         else:
-            idx = line.find('?')
+            qc+=1
+	    idx = line.find('?')
             tmp = line[idx+1:].split('\t')
             task["Q"] = line[:idx]
-            task["A"] = tmp[1].strip()
+#            print line[:idx]
+	    task["A"] = tmp[1].strip()
+#            print tmp[1].strip()
+#    	     raw_input("Press Enter to continue...")
             tasks.append(task.copy())
-
+    print "\t%d Facts and %d Questions" % (lc , qc)
     return tasks
 
 
 def get_babi_raw(id, test_id):
     babi_map = {
+	"sq1" : "devset",
+ 	"sq2" : "squad2babi_devset",
+	"sqf" : "squad-full-dataset",
+	"toy" : "toysetsquad",
 	"0": "all_shuffled",   
 	"1": "qa1_single-supporting-fact",
         "2": "qa2_two-supporting-facts",
@@ -35,6 +52,7 @@ def get_babi_raw(id, test_id):
         "5": "qa5_three-arg-relations",
         "6": "qa6_yes-no-questions",
         "7": "qa7_counting",
+        "8": "qa8_lists-sets",
         "8": "qa8_lists-sets",
         "9": "qa9_simple-negation",
         "10": "qa10_indefinite-knowledge",
